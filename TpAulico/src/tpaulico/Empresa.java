@@ -14,16 +14,20 @@ import java.util.ArrayList;
 public class Empresa {
     
     private String razonSocial;
-    private Integer cuit;
+    private int cuit;
     private ArrayList<Empleado> Empleados;
 
+    
+    public Empresa() {
+    }
+    
+    
     public Empresa(String razonSocial, int cuit) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
     }
 
-    public Empresa() {
-    }
+    
 
     
     public Empresa(String razonSocial, int cuit, ArrayList<Empleado> Empleados) {
@@ -44,7 +48,7 @@ public class Empresa {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(Integer cuit) {
         this.cuit = cuit;
     }
 

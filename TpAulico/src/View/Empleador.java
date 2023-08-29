@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
 
+package View;
+import tpaulico.Empresa;
 /**
  *
  * @author Marcos
  */
-public class Empresa extends javax.swing.JFrame {
+public class Empleador extends javax.swing.JFrame {
 
     /**
      * Creates new form Empresa
      */
-    public Empresa() {
+    public Empleador() {
         initComponents();
     }
 
@@ -232,9 +233,9 @@ public class Empresa extends javax.swing.JFrame {
     private void jbCrearEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEmpresaActionPerformed
         // TODO add your handling code here:
         String razonSocial =  jtRazonSocial.getText();
-        Integer cuit = Integer.parseInt(jtCuit.getText());
+        int cuit = Integer.parseInt(jtCuit.getText());
         
-        Empresa empresa = new Empresa();        
+        Empresa empresa = new Empresa(razonSocial, cuit);        
         
         
         
@@ -257,20 +258,21 @@ public class Empresa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Empresa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Empleador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Empresa().setVisible(true);
+                new Empleador().setVisible(true);
             }
         });
     }
