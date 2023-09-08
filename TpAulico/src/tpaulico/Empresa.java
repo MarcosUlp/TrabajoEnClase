@@ -5,17 +5,17 @@
  */
 package tpaulico;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  *
  * @author Marcos
  */
-public class Empresa {
+public class Empresa implements Comparable<Empresa> {
     
     private String razonSocial;
     private int cuit;
-    private ArrayList<Empleado> Empleados;
+    private TreeSet<Empleado> Empleados;
 
     
     public Empresa() {
@@ -30,7 +30,7 @@ public class Empresa {
     
 
     
-    public Empresa(String razonSocial, int cuit, ArrayList<Empleado> Empleados) {
+    public Empresa(String razonSocial, int cuit, TreeSet<Empleado> Empleados) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
         this.Empleados = Empleados;
@@ -52,17 +52,28 @@ public class Empresa {
         this.cuit = cuit;
     }
 
-    public ArrayList<Empleado> getEmpleados() {
+    public TreeSet<Empleado> getEmpleados() {
         return Empleados;
     }
 
-    public void setEmpleados(ArrayList<Empleado> Empleados) {
+    public void setEmpleados(TreeSet<Empleado> Empleados) {
         this.Empleados = Empleados;
     }
     
     public void agregarEmpleado(Empleado e){
         Empleados.add(e);
     }
+
+    public int compareTo(Empresa t) {
+        if (cuit==t.cuit) {
+            return 0;
+        }else if (cuit>t.cuit) {
+            return 1;
+        }else{
+            return -1;
+        } 
+    }
+    
     public void mostrarEmpleado(){
         
     }
