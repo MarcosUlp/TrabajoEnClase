@@ -5,6 +5,7 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tpaulico.Empleado;
 import tpaulico.Empresa;
@@ -13,18 +14,19 @@ import tpaulico.Empresa;
  *
  * @author Marcos
  */
-public class Empleados extends javax.swing.JInternalFrame {
+public class VistaEmpleados extends javax.swing.JInternalFrame {
+
     DefaultTableModel modelo = new DefaultTableModel();
-    
+
     /**
      * Creates new form Empleados
      */
-    public Empleados() {
+    public VistaEmpleados() {
         initComponents();
         armarTabla();
-        for(Empresa emp:Empleador.Empresas){
-        jcEmpresas.setSelectedItem(emp);
-        
+        for (Empresa emp : Empleador.Empresas) {
+            jcEmpresas.addItem(emp);
+
         }
     }
 
@@ -42,8 +44,8 @@ public class Empleados extends javax.swing.JInternalFrame {
         jteTabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        jcEmpresas.setModel(new javax.swing.DefaultComboBoxModel<>(new Empresa []{} )
-        );
+        setClosable(true);
+
         jcEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcEmpresasActionPerformed(evt);
@@ -99,25 +101,19 @@ public class Empleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEmpresasActionPerformed
-        // TODO add your handling code here:
-        borrarFilas();
-        Empresa var = (Empresa)jcEmpresas.getSelectedItem();
-        for(Empresa emp:Empleador.Empresas){
+
+       
+            Empresa var = (Empresa) jcEmpresas.getSelectedItem();
             
-            for (Empleado empl:emp.getEmpleados()){
-                if(empl.getEmpresa().equals(var)){
-                modelo.addRow(new Object[]{
-                empl.getNombreApellido(),
-                empl.getCategoria(),
-                empl.getDni(),
-                empl.getEmpresa(),
-                
-            });
-            
-            
+            try{
+        for (Empleado empl : var.getEmpleados()) {
+            if (empl.getEmpresa().equals(var)) {
+                modelo.addRow(new Object[]{empl.getNombreApellido(), empl.getCategoria(), empl.getDni(), empl.getEmpresa()});
             }
         }
-        }
+            }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(this, "La empresa no tiene ningun empleado");
+            }
     }//GEN-LAST:event_jcEmpresasActionPerformed
 
 
@@ -127,16 +123,17 @@ public class Empleados extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Empresa> jcEmpresas;
     private javax.swing.JTable jteTabla;
     // End of variables declaration//GEN-END:variables
-public void armarTabla(){
+public void armarTabla() {
         modelo.addColumn("Nombre");
         modelo.addColumn("Categoria");
         modelo.addColumn("DNI");
         modelo.addColumn("Empresa");
         jteTabla.setModel(modelo);
     }
-    private void borrarFilas(){
-        int indice=modelo.getRowCount()-1;
-        for(int i = indice;i>=0;i--){
+
+    private void borrarFilas() {
+        int indice = modelo.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }

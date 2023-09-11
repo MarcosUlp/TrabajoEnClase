@@ -5,6 +5,7 @@
  */
 package tpaulico;
 
+import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -18,13 +19,14 @@ public class Empresa implements Comparable<Empresa> {
     private TreeSet<Empleado> Empleados;
 
     
-    public Empresa() {
-    }
-    
-    
     public Empresa(String razonSocial, int cuit) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
+    }
+
+    @Override
+    public String toString() {
+        return razonSocial;
     }
 
     
@@ -60,8 +62,8 @@ public class Empresa implements Comparable<Empresa> {
         this.Empleados = Empleados;
     }
     
-    public void agregarEmpleado(Empleado e){
-        Empleados.add(e);
+    public void agregarEmpleado(Empleado empl){
+        Empleados.add(empl);
     }
 
     public int compareTo(Empresa t) {
@@ -73,8 +75,43 @@ public class Empresa implements Comparable<Empresa> {
             return -1;
         } 
     }
-    
-    public void mostrarEmpleado(){
-        
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.razonSocial);
+        hash = 71 * hash + this.cuit;
+        hash = 71 * hash + Objects.hashCode(this.Empleados);
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empresa other = (Empresa) obj;
+        if (this.cuit != other.cuit) {
+            return false;
+        }
+        if (!Objects.equals(this.razonSocial, other.razonSocial)) {
+            return false;
+        }
+        if (!Objects.equals(this.Empleados, other.Empleados)) {
+            return false;
+        }
+        return true;
+    }
+
+
+  
+
+        
+
 }

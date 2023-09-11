@@ -25,16 +25,25 @@ public class Empleador extends javax.swing.JFrame {
     public Empleador() {
         initComponents();
         setLocationRelativeTo(null);
-        Empresa arcor = new Empresa("Arcor", 555);
-        Empresa Glucovil = new Empresa("Glucovil", 666);
-        Empresa Kohinor = new Empresa("Kohinor", 777);
-        Empresas.add(arcor);
-        Empresas.add(Glucovil);
-        Empresas.add(Kohinor);
-        Empleado empleado1 = new Empleado(42562212, "Marcos ", "Operario", 422042.32, arcor);
-        Empleado empleado2 = new Empleado(43562452, "Zara", "Jefe", 650000, arcor);
-        Empleado empleado3 = new Empleado(32456213, "Samuel", "Maquinista", 400000, Glucovil);
-        Empleado empleado4 = new Empleado(40452123, "Juan", "Operario", 400000, Kohinor);
+//        Empresa arcor = new Empresa("Arcor", 555);
+//        Empresa Glucovil = new Empresa("Glucovil", 666);
+//        Empresa Kohinor = new Empresa("Kohinor", 777);
+//        
+//        Empleado empleado1 = new Empleado(42562212, "Marcos ", "Operario", 422042.32, arcor);
+//        Empleado empleado2 = new Empleado(43562452, "Zara", "Jefe", 650000, arcor);
+//        Empleado empleado3 = new Empleado(32456213, "Samuel", "Maquinista", 400000, Glucovil);
+//        Empleado empleado4 = new Empleado(40452123, "Juan", "Operario", 400000, Kohinor);
+//        arcor.agregarEmpleado(empleado1);
+//        arcor.agregarEmpleado(empleado2);
+//        Glucovil.agregarEmpleado(empleado3);
+//        Kohinor.agregarEmpleado(empleado4);
+//        Empresas.add(arcor);
+//        Empresas.add(Glucovil);
+//        Empresas.add(Kohinor);
+//        
+        for(Empresa emp:Empleador.Empresas){
+            jcEmpresa.addItem(emp);
+        }
     }
 
     /**
@@ -59,9 +68,8 @@ public class Empleador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jtDocumento = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
-        jtApellido = new javax.swing.JTextField();
+        jtDocumento = new javax.swing.JTextField();
         jcCategoria = new javax.swing.JComboBox<>();
         jtSueldo = new javax.swing.JTextField();
         jcEmpresa = new javax.swing.JComboBox<>();
@@ -126,7 +134,7 @@ public class Empleador extends javax.swing.JFrame {
 
         jLabel1.setText("Documento");
 
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre y");
 
         jLabel3.setText("Apellido");
 
@@ -136,11 +144,9 @@ public class Empleador extends javax.swing.JFrame {
 
         jLabel6.setText("Empresa");
 
-        jtDocumento.setEnabled(false);
-
         jtNombre.setEnabled(false);
 
-        jtApellido.setEnabled(false);
+        jtDocumento.setEnabled(false);
 
         jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Jefe", "Administrativo", "Operario" }));
         jcCategoria.setEnabled(false);
@@ -151,6 +157,11 @@ public class Empleador extends javax.swing.JFrame {
 
         jbGuardar.setText("Guardar");
         jbGuardar.setEnabled(false);
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbMostrar.setText("Mostrar Empleado");
         jbMostrar.setEnabled(false);
@@ -166,54 +177,54 @@ public class Empleador extends javax.swing.JFrame {
             jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jbGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jbMostrar)
+                .addGap(24, 24, 24))
+            .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
                 .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
-                        .addComponent(jbGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbMostrar)
-                        .addGap(24, 24, 24))
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
                     .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
-                        .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtNombre))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap()
+                        .addComponent(jLabel5)))
+                .addGap(18, 18, 18)
+                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpIngresarEmpleadoLayout.setVerticalGroup(
             jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(56, 56, 56)
+                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpIngresarEmpleadoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jcCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jcCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jpIngresarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jcEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -282,11 +293,12 @@ public class Empleador extends javax.swing.JFrame {
             }
             Empresa nuevaEmpresa = new Empresa(razonSocial, cuit);
             boolean agregado = Empresas.add(nuevaEmpresa);
-            jcEmpresa.addItem(nuevaEmpresa);
+            
             if (agregado) {
                 JOptionPane.showMessageDialog(this, "Empresa agregada correctamente");
                 jtCuit.setText("");
                 jtRazonSocial.setText("");
+                jcEmpresa.addItem(nuevaEmpresa);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Cuil duplicado");
@@ -306,11 +318,31 @@ public class Empleador extends javax.swing.JFrame {
         // TODO add your handling code here:
         Escritorio.removeAll();
         Escritorio.repaint();
-        Empleados vistaE = new Empleados ();
+        VistaEmpleados vistaE = new VistaEmpleados();
         Escritorio.add(vistaE);
         vistaE.setVisible(true);
         Escritorio.moveToFront(vistaE);
     }//GEN-LAST:event_jbMostrarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        String nombre = jtNombre.getText();
+        int documento = Integer.parseInt(jtDocumento.getText());
+        String categoria =(String) jcCategoria.getSelectedItem();
+        double sueldo = Double.parseDouble(jtSueldo.getText());    
+        Empresa empresa = (Empresa) jcEmpresa.getSelectedItem();
+        
+        Empleado agregar = new Empleado(documento,nombre,categoria,sueldo,empresa);
+        
+        for(Empresa empr:Empresas){
+            if (empr.equals(empresa)) {
+                empr.agregarEmpleado(agregar);
+                
+            }
+        }
+        
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,7 +397,6 @@ public class Empleador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcCategoria;
     private javax.swing.JComboBox<Empresa> jcEmpresa;
     private javax.swing.JPanel jpIngresarEmpleado;
-    private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtCuit;
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
