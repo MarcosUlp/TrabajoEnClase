@@ -9,7 +9,8 @@ package tpaulico;
  *
  * @author Marcos
  */
-public class Empleado {
+public class Empleado implements Comparable<Empleado> {
+
     private int dni;
     private String nombreApellido;
     private String categoria;
@@ -68,6 +69,16 @@ public class Empleado {
     public String toString() {
         return "Empleado{" + "dni=" + dni + ", nombreApellido=" + nombreApellido + ", categoria=" + categoria + ", sueldo=" + sueldo + ", empresa=" + empresa + '}';
     }
-    
-    
+
+    @Override
+    public int compareTo(Empleado t) {
+        if (dni == t.dni) {
+            return 0;
+        } else if (dni > t.dni) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
 }

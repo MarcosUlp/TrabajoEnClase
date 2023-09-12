@@ -24,7 +24,7 @@ public class VistaEmpleados extends javax.swing.JInternalFrame {
     public VistaEmpleados() {
         initComponents();
         armarTabla();
-        for (Empresa emp : Empleador.Empresas) {
+        for (Empresa emp : Empleador.ListaEmpresas) {
             jcEmpresas.addItem(emp);
 
         }
@@ -102,7 +102,7 @@ public class VistaEmpleados extends javax.swing.JInternalFrame {
 
     private void jcEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEmpresasActionPerformed
 
-       
+       borrarFilas();
             Empresa var = (Empresa) jcEmpresas.getSelectedItem();
             
             try{

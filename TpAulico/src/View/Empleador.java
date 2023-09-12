@@ -6,6 +6,7 @@
 package View;
 
 import java.awt.Component;
+import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.JOptionPane;
 import tpaulico.Empleado;
@@ -17,31 +18,32 @@ import tpaulico.Empresa;
  */
 public class Empleador extends javax.swing.JFrame {
 
-    public static TreeSet<Empresa> Empresas = new TreeSet<>();
-
+    public static TreeSet<Empresa> ListaEmpresas = new TreeSet<>();
+    Iterator<Empresa> it = ListaEmpresas.iterator();
+    
     /**
      * Creates new form Empresa
      */
     public Empleador() {
         initComponents();
         setLocationRelativeTo(null);
-//        Empresa arcor = new Empresa("Arcor", 555);
-//        Empresa Glucovil = new Empresa("Glucovil", 666);
-//        Empresa Kohinor = new Empresa("Kohinor", 777);
-//        
-//        Empleado empleado1 = new Empleado(42562212, "Marcos ", "Operario", 422042.32, arcor);
-//        Empleado empleado2 = new Empleado(43562452, "Zara", "Jefe", 650000, arcor);
-//        Empleado empleado3 = new Empleado(32456213, "Samuel", "Maquinista", 400000, Glucovil);
-//        Empleado empleado4 = new Empleado(40452123, "Juan", "Operario", 400000, Kohinor);
-//        arcor.agregarEmpleado(empleado1);
-//        arcor.agregarEmpleado(empleado2);
-//        Glucovil.agregarEmpleado(empleado3);
-//        Kohinor.agregarEmpleado(empleado4);
-//        Empresas.add(arcor);
-//        Empresas.add(Glucovil);
-//        Empresas.add(Kohinor);
-//        
-        for(Empresa emp:Empleador.Empresas){
+        Empresa arcor = new Empresa("Arcor", 555);
+        Empresa Glucovil = new Empresa("Glucovil", 666);
+        Empresa Kohinor = new Empresa("Kohinor", 777);
+        
+        Empleado empleado1 = new Empleado(42562212, "Marcos ", "Operario", 422042.32, arcor);
+        Empleado empleado2 = new Empleado(43562452, "Zara", "Jefe", 650000, arcor);
+        Empleado empleado3 = new Empleado(32456213, "Samuel", "Maquinista", 400000, Glucovil);
+        Empleado empleado4 = new Empleado(40452123, "Juan", "Operario", 400000, Kohinor);
+        arcor.agregarEmpleado(empleado1);
+        arcor.agregarEmpleado(empleado2);
+        Glucovil.agregarEmpleado(empleado3);
+        Kohinor.agregarEmpleado(empleado4);
+        ListaEmpresas.add(arcor);
+        ListaEmpresas.add(Glucovil);
+        ListaEmpresas.add(Kohinor);
+        
+        for(Empresa emp:Empleador.ListaEmpresas){
             jcEmpresa.addItem(emp);
         }
     }
@@ -283,7 +285,7 @@ public class Empleador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
                 return;
             }
-            for (Empresa emp : Empresas) {
+            for (Empresa emp : ListaEmpresas) {
                 if (emp.getRazonSocial().toLowerCase().startsWith(razonSocial.toLowerCase())) {
                     JOptionPane.showMessageDialog(this, "No puede haber dos empresas con la misma razon social");
                     jtCuit.setText("");
@@ -292,7 +294,7 @@ public class Empleador extends javax.swing.JFrame {
                 }
             }
             Empresa nuevaEmpresa = new Empresa(razonSocial, cuit);
-            boolean agregado = Empresas.add(nuevaEmpresa);
+            boolean agregado = ListaEmpresas.add(nuevaEmpresa);
             
             if (agregado) {
                 JOptionPane.showMessageDialog(this, "Empresa agregada correctamente");
@@ -303,6 +305,7 @@ public class Empleador extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Cuil duplicado");
                 jtCuit.setText("");
+                return;
             }
             Desbloquear();
         } catch (NumberFormatException ex) {
@@ -326,22 +329,40 @@ public class Empleador extends javax.swing.JFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        try{
+            
         String nombre = jtNombre.getText();
+        
         int documento = Integer.parseInt(jtDocumento.getText());
         String categoria =(String) jcCategoria.getSelectedItem();
         double sueldo = Double.parseDouble(jtSueldo.getText());    
         Empresa empresa = (Empresa) jcEmpresa.getSelectedItem();
         
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
+                jtDocumento.setText("");
+                jtNombre.setText("");
+                jtSueldo.setText("");
+                return;
+            }
         Empleado agregar = new Empleado(documento,nombre,categoria,sueldo,empresa);
         
-        for(Empresa empr:Empresas){
+        for(Empresa empr:ListaEmpresas){
             if (empr.equals(empresa)) {
-                empr.agregarEmpleado(agregar);
                 
+                empresa.agregarEmpleado(agregar);
+                JOptionPane.showMessageDialog(this, "Empleado agregado correctamente");
+                jtDocumento.setText("");
+                jtNombre.setText("");
+                jtSueldo.setText("");
             }
         }
-        
-        
+        }catch(NullPointerException ex){
+        JOptionPane.showMessageDialog(this, "Debe ingresar caracteres validos");
+        jtDocumento.setText("");
+                jtNombre.setText("");
+                jtSueldo.setText("");
+                }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     /**
